@@ -1,0 +1,6 @@
+@formationAppApi_HostAddress = http://localhost:5022
+
+GET {{formationAppApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

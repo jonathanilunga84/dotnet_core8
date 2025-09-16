@@ -1,0 +1,50 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using MonApiMetier.Data; // Ton DbContext
+using MonApiMetier.Middleware; // Ton middleware d’auth
+
+var builder = WebApplication.CreateBuilder(args);
+
+// 🔹 Connexion MySQL
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<MonDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+// 🔹 Activation des controllers
+builder.Services.AddControllers();
+
+// 🔹 Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// 🔹 Swagger UI
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+// 🔹 Middleware d’authentification personnalisé
+app.UseMiddleware<AuthMiddleware>(); // Ton middleware maison
+
+app.UseRouting();
+app.UseAuthorization(); // Si tu utilises des attributs [Authorize]
+
+app.MapControllers(); // Active les routes des controllers
+
+app.Run();
+
+
+/// Le code qui suivent et a mettre dans  appsettings.json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=MonDbMetier;User=root;Password=motdepasse;"
+  }
+}
+
+//Dependace pour MySQL (Installer EF Core pour MySQL)
+dotnet add package Pomelo.EntityFrameworkCore.MySql
