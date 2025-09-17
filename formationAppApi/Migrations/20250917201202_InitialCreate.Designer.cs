@@ -12,7 +12,7 @@ using formationAppApi.Data;
 namespace formationAppApi.Migrations
 {
     [DbContext(typeof(MonDbContext))]
-    [Migration("20250916175258_InitialCreate")]
+    [Migration("20250917201202_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,98 +37,116 @@ namespace formationAppApi.Migrations
 
                     b.HasIndex("CoursSuivisId");
 
-                    b.ToTable("ApprenantCours");
+                    b.ToTable("apprenantcours");
                 });
 
             modelBuilder.Entity("formationAppApi.Models.Apprenant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adresse")
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("adresse");
 
                     b.Property<DateTime>("DateNaissance")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("datenaissance");
 
                     b.Property<string>("Email")
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
+                        .HasColumnType("varchar(60)")
+                        .HasColumnName("nom");
 
                     b.Property<string>("Postnom")
                         .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
+                        .HasColumnType("varchar(60)")
+                        .HasColumnName("postnom");
 
                     b.Property<string>("Prenom")
                         .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
+                        .HasColumnType("varchar(60)")
+                        .HasColumnName("prenom");
 
                     b.Property<string>("Sexe")
                         .HasMaxLength(12)
-                        .HasColumnType("varchar(12)");
+                        .HasColumnType("varchar(12)")
+                        .HasColumnName("sexe");
 
                     b.Property<string>("Telephone")
                         .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("telephone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Apprenants");
+                    b.ToTable("apprenant");
                 });
 
             modelBuilder.Entity("formationAppApi.Models.Cours", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext");
+                        .HasColumnType("longtext")
+                        .HasColumnName("description");
 
                     b.Property<string>("DureeHeures")
                         .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("dureeheures");
 
                     b.Property<string>("Titre")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("titre");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cours");
+                    b.ToTable("cours");
                 });
 
             modelBuilder.Entity("formationAppApi.Models.Note", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ApprenantId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("apprenantid");
 
                     b.Property<string>("Commentaire")
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("commentaire");
 
                     b.Property<int?>("CoursId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("coursid");
 
                     b.Property<int>("Valeur")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("valeur");
 
                     b.HasKey("Id");
 
@@ -136,7 +154,7 @@ namespace formationAppApi.Migrations
 
                     b.HasIndex("CoursId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("note");
                 });
 
             modelBuilder.Entity("ApprenantCours", b =>
@@ -163,17 +181,12 @@ namespace formationAppApi.Migrations
                         .IsRequired();
 
                     b.HasOne("formationAppApi.Models.Cours", "Cours")
-                        .WithMany("Notes")
+                        .WithMany()
                         .HasForeignKey("CoursId");
 
                     b.Navigation("Apprenant");
 
                     b.Navigation("Cours");
-                });
-
-            modelBuilder.Entity("formationAppApi.Models.Cours", b =>
-                {
-                    b.Navigation("Notes");
                 });
 #pragma warning restore 612, 618
         }

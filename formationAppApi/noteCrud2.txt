@@ -1,0 +1,47 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+[ApiController]
+[Route("api/[controller]")]
+public class UtilisateursController : ControllerBase
+{
+    private readonly MonDbContext _context;
+
+    public UtilisateursController(MonDbContext context)
+    {
+        _context = context;
+    }
+
+    // GET: /api/Utilisateurs
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateurs()
+    {
+        return await _context.Utilisateurs.ToListAsync();
+    }
+
+    // GET: /api/Utilisateurs/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Utilisateur>> GetUtilisateur(int id)
+    {
+        var utilisateur = await _context.Utilisateurs.FindAsync(id);
+
+        if (utilisateur == null)
+        {
+            return NotFound();
+        }
+
+        return utilisateur;
+    }
+
+    // POST: /api/Utilisateurs
+    [HttpPost]
+    public async Task<ActionResult<Utilisateur>> PostUtilisateur(Utilisateur utilisateur)
+    {
+        _context.Utilisateurs.Add(utilisateur);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetUtilisateur), new { id = utilisateur.Id }, utilisateur);
+    }
+}

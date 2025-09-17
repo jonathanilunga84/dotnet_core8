@@ -3,8 +3,11 @@
 using System.ComponentModel.DataAnnotations;
 // using System.ComponentModel;
 // using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace formationAppApi.Models;
+
+[Table("cours")]
 public class Cours
 {
     public int Id { get; set; }
@@ -16,7 +19,5 @@ public class Cours
     [MaxLengthAttribute(20)]
     public String? DureeHeures { get; set; }
 
-    //public ICollection<Apprenant> ApprenantsInscrits { get; set; } // = new List<Apprenant>();
-    public ICollection<Apprenant> ApprenantsInscrits { get; set; } = new HashSet<Apprenant>();
-    public ICollection<Note> Notes { get; set; } = new HashSet<Note>();
+    public ICollection<Apprenant> ApprenantsInscrits { get; set; } = new List<Apprenant>();
 }

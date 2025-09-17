@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 namespace formationAppApi.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
+[Table("note")]
 public class Note
 {
     public int Id { get; set; }

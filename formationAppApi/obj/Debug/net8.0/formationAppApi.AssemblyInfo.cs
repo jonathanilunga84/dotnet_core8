@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("formationAppApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a77119a1495a65627d1d4d524e9d6c6604fff6f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("formationAppApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("formationAppApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

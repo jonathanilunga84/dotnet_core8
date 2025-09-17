@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace formationAppApi.Models;
+
+[Table("apprenant")]
 public class Apprenant
 {
     public int Id { get; set; }
@@ -15,7 +17,7 @@ public class Apprenant
     public string Nom { get; set; } = "My name"; // pour le code
 
     [MaxLengthAttribute(60)]
-    //[DefaultValueAttribute("My name")]
+    //[DefaultValueAttribute("My name prenom")]
     public string? Postnom { get; set; }
 
     [MaxLengthAttribute(60)]
