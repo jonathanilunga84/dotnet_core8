@@ -134,3 +134,12 @@
 /home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 /home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /home/jonathan/netCore/formationAppApi/obj/Debug/net8.0/formationAppApi.sourcelink.json
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/home/jonathan/netCore/formationAppApi/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

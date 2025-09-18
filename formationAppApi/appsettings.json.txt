@@ -10,8 +10,9 @@
     "DefaultConnection": "Server=localhost;Port=3306;Database=dotnetcore_formation;Uid=jonathan;Pwd=jo0811748411;"
   },
   "Jwt": {
-    "Key": "VotreCléSecrèteSuperLongueEtComplexe",
-    "Issuer": "VotreApplication",
-    "Audience": "VosUtilisateurs"
+    "Key": "VotreCléSecrèteSuperLongueEtComplexe", MaCléSuperSecrète1234567890abcdef
+    "Issuer": "https://votre-domaine.com",
+    "Audience": "https://votre-domaine.com",
+    "ExpireMinutes": 30
   }
 }

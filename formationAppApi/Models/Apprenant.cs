@@ -38,4 +38,6 @@ public class Apprenant
     //public ICollection<Cours>? CoursSuivis { get; set; }
     //public required ICollection<Cours> CoursSuivis { get; set; } = new HashSet<Cours>();
     public ICollection<Cours> CoursSuivis { get; set; } = new HashSet<Cours>();
+    // 🔗 Navigation vers l'utilisateur
+    public ApplicationUser? UserSave { get; set; }
 }

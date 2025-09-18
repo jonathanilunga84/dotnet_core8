@@ -2,14 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using formationAppApi.Models;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-//Pour identity
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-
-
 namespace formationAppApi.Data
 {
-    public class MonDbContext : IdentityDbContext<ApplicationUser> //    ou IdentityDbContext<ApplicationUser> OU IdentityDbContext<IdentityUser> ou bien IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class MonDbContext : DbContext //    ou IdentityDbContext<ApplicationUser> OU IdentityDbContext<IdentityUser> ou bien IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public MonDbContext(DbContextOptions<MonDbContext> options) : base(options)
         {
