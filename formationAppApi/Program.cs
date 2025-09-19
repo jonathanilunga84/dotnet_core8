@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 // using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 // using System;
 // using MySql.EntityFrameworkCore.Extensions;
+using formationAppApi.Models;
 
 //pour JWT
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +15,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Any;
 //End Swagger
+
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,6 +116,17 @@ builder.Services.AddSwaggerGen(c =>
 //Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 // End Activer l’authentification dans Swagger
+
+//Pour UserManager
+// Ajoutez les services d'identité à votre conteneur.
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    // Vous pouvez configurer des options ici, comme les règles de mot de passe.
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<MonDbContext>()
+.AddDefaultTokenProviders();
+// End Pour UserManager
 
 var app = builder.Build();
 

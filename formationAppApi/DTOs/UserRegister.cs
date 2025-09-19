@@ -1,15 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace formationAppApi.DTOs;
-public class LoginDto
+
+public class UserRegisterDto
 {
-    // [Required]
-    // [EmailAddress]
     [Required(ErrorMessage = "L'email est requis.")]
     [EmailAddress(ErrorMessage = "Le format de l'email est invalide.")]
     public string Email { get; set; } = string.Empty;
-
-    [Required]
-    [StringLength(100, MinimumLength = 6)] 
     public string Password { get; set; } = string.Empty;
+    public string Role { get; set; } = string.Empty; // rôle à assigner
+    
+    // public List<string> Roles { get; set; } // Changement ici : une liste de rôles
 }

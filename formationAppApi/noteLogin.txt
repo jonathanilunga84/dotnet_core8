@@ -1,0 +1,58 @@
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly IConfiguration _config;
+
+    // Injection des dépendances via le constructeur
+    public AuthController(UserManager<IdentityUser> userManager, IConfiguration config)
+    {
+        _userManager = userManager;
+        _config = config;
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginModel model)
+    {
+        // 1. Trouver l'utilisateur
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user == null)
+            return Unauthorized();
+
+        // 2. Vérifier le mot de passe
+        var isValid = await _userManager.CheckPasswordAsync(user, model.Password);
+        if (!isValid)
+            return Unauthorized();
+
+        // 3. Générer le token JWT (en utilisant _config)
+        var token = GenerateJwtToken(user);
+
+        return Ok(new { Token = token });
+    }
+
+    private string GenerateJwtToken(IdentityUser user)
+    {
+        var key = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(_config["Jwt:Key"])); // ← Utilise _config
+        
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+
+        var token = new JwtSecurityToken(
+            issuer: _config["Jwt:Issuer"],          // ← Utilise _config
+            audience: _config["Jwt:Audience"],      // ← Utilise _config
+            claims: claims,
+            expires: DateTime.Now.AddHours(2),
+            signingCredentials: credentials
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+}
